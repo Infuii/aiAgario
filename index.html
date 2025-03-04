@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agar.io Clone</title>
+    <title>Enhanced Agar.io Clone</title>
     <style>
         * {
             margin: 0;
@@ -86,17 +86,19 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         
         .mode-btn {
             flex: 1;
             padding: 10px 5px;
-            margin: 0 5px;
+            margin: 0 5px 5px 5px;
             border: 2px solid #ddd;
             border-radius: 8px;
             background: #f8f8f8;
             cursor: pointer;
             transition: all 0.2s;
+            min-width: 80px;
         }
         
         .mode-btn.active {
@@ -240,6 +242,44 @@
             margin-right: 5px;
         }
         
+        #team-stats {
+            position: absolute;
+            top: 250px;
+            left: 20px;
+            width: 200px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            display: none;
+        }
+        
+        #team-stats h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        
+        .team-bar {
+            height: 20px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        .team-bar-label {
+            position: absolute;
+            right: 5px;
+            top: 0;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 20px;
+            text-shadow: 0 0 2px black;
+        }
+        
         #controls {
             position: absolute;
             bottom: 20px;
@@ -259,10 +299,176 @@
             margin: 5px 0;
             font-size: 14px;
         }
+        
+        #admin-panel {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 250px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            display: none;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        
+        #admin-panel h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .admin-control {
+            margin-bottom: 10px;
+        }
+        
+        .admin-control label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .admin-control input[type="range"] {
+            width: 100%;
+        }
+        
+        .admin-control input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        
+        .admin-control .value {
+            float: right;
+            font-weight: bold;
+        }
+        
+        .admin-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .admin-buttons button {
+            flex: 1;
+            margin: 0 5px;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .admin-buttons button:hover {
+            background: #2980b9;
+        }
+
+        /* Death animation container */
+        #death-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        /* Big Pellet style */
+        .big-pellet {
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.7);
+        }
+
+        /* Enhanced blob styling */
+        .blob {
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Improved pellet glow effect */
+        .pellet-glow {
+            filter: blur(5px);
+            mix-blend-mode: screen;
+        }
+
+        /* Enhanced virus appearance */
+        .virus {
+            filter: drop-shadow(0 0 15px rgba(0, 255, 0, 0.4));
+        }
+
+        /* Smooth animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .admin-section {
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        .admin-section h4 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .admin-control {
+            margin-bottom: 8px;
+        }
+
+        .admin-control input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            -webkit-appearance: none;
+            background: #ddd;
+        }
+
+        .admin-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #3498db;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .admin-control input[type="range"]::-webkit-slider-thumb:hover {
+            background: #2980b9;
+        }
+
+        .admin-buttons button {
+            padding: 8px 12px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .admin-buttons button:hover {
+            background: #2980b9;
+        }
     </style>
 </head>
 <body>
     <canvas id="gameCanvas"></canvas>
+    <div id="death-animation"></div>
     
     <div id="menu">
         <h1>Blob.io</h1>
@@ -272,6 +478,7 @@
         <div class="mode-selection">
             <div class="mode-btn active" data-mode="ffa">FFA</div>
             <div class="mode-btn" data-mode="teams">Teams</div>
+            <div class="mode-btn" data-mode="admin">Admin Mode</div>
         </div>
         
         <div id="team-selection" style="display: none;">
@@ -311,38 +518,177 @@
         </div>
     </div>
     
+    <div id="team-stats" style="display: none;">
+        <h2>Team History</h2>
+        <div id="team-bars">
+            <!-- Bars will be added dynamically -->
+        </div>
+    </div>
+    
     <div id="controls" style="display: none;">
         <h3>Controls:</h3>
         <p>Move: WASD or Arrow Keys</p>
         <p>Split: Spacebar</p>
         <p>Eject Mass: E</p>
     </div>
+    
+    <div id="admin-panel" style="display: none;">
+        <h3>Admin Controls</h3>
+        
+        <div class="admin-section">
+            <h4>World Settings</h4>
+            <div class="admin-control">
+                <label>World Size <span class="value" id="world-size-value">4000</span></label>
+                <input type="range" id="world-size" min="2000" max="8000" step="500" value="4000">
+            </div>
+            
+            <div class="admin-control">
+                <label>Grid Spacing <span class="value" id="grid-spacing-value">40</span></label>
+                <input type="range" id="grid-spacing" min="20" max="100" step="10" value="40">
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h4>Player Settings</h4>
+            <div class="admin-control">
+                <label>Start Mass <span class="value" id="start-mass-value">10</span></label>
+                <input type="range" id="start-mass" min="10" max="1000" step="10" value="10">
+            </div>
+            
+            <div class="admin-control">
+                <label>Min Speed <span class="value" id="min-speed-value">2</span></label>
+                <input type="range" id="min-speed" min="1" max="10" step="0.5" value="2">
+            </div>
+            
+            <div class="admin-control">
+                <label>Max Speed <span class="value" id="max-speed-value">5</span></label>
+                <input type="range" id="max-speed" min="3" max="15" step="0.5" value="5">
+            </div>
+            
+            <div class="admin-control">
+                <label>Base Size <span class="value" id="base-size-value">30</span></label>
+                <input type="range" id="base-size" min="20" max="100" step="5" value="30">
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h4>Split Settings</h4>
+            <div class="admin-control">
+                <label>Split Force <span class="value" id="split-force-value">10</span></label>
+                <input type="range" id="split-force" min="5" max="30" step="1" value="10">
+            </div>
+            
+            <div class="admin-control">
+                <label>Split Delay (ms) <span class="value" id="split-delay-value">30000</span></label>
+                <input type="range" id="split-delay" min="5000" max="60000" step="5000" value="30000">
+            </div>
+            
+            <div class="admin-control">
+                <label>Max Splits <span class="value" id="max-splits-value">16</span></label>
+                <input type="range" id="max-splits" min="2" max="32" step="2" value="16">
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h4>Game Elements</h4>
+            <div class="admin-control">
+                <label>Pellet Count <span class="value" id="pellet-count-value">2000</span></label>
+                <input type="range" id="pellet-count" min="100" max="5000" step="100" value="2000">
+            </div>
+            
+            <div class="admin-control">
+                <label>Virus Count <span class="value" id="virus-count-value">15</span></label>
+                <input type="range" id="virus-count" min="0" max="50" step="1" value="15">
+            </div>
+            
+            <div class="admin-control">
+                <label>Exp Virus Count <span class="value" id="exp-virus-count-value">5</span></label>
+                <input type="range" id="exp-virus-count" min="0" max="20" step="1" value="5">
+            </div>
+            
+            <div class="admin-control">
+                <label>AI Count <span class="value" id="ai-count-value">15</span></label>
+                <input type="range" id="ai-count" min="0" max="50" step="1" value="15">
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h4>Speed Multipliers</h4>
+            <div class="admin-control">
+                <label>Player Speed <span class="value" id="player-speed-value">3</span></label>
+                <input type="range" id="player-speed" min="1" max="10" step="0.5" value="3">
+            </div>
+            
+            <div class="admin-control">
+                <label>AI Speed <span class="value" id="ai-speed-value">3</span></label>
+                <input type="range" id="ai-speed" min="1" max="10" step="0.5" value="3">
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <h4>Special Features</h4>
+            <div class="admin-control">
+                <label>
+                    <input type="checkbox" id="big-pellets"> Enable Big Pellets
+                </label>
+            </div>
+            
+            <div class="admin-control">
+                <label>
+                    <input type="checkbox" id="no-collision"> No Collision
+                </label>
+            </div>
+            
+            <div class="admin-control">
+                <label>
+                    <input type="checkbox" id="rainbow-mode"> Rainbow Mode
+                </label>
+            </div>
+        </div>
+
+        <div class="admin-buttons">
+            <button id="clear-viruses">Clear Viruses</button>
+            <button id="add-mass">Add 500 Mass</button>
+            <button id="reset-settings">Reset Settings</button>
+        </div>
+    </div>
 
     <script>
-        // Game Constants
-        const WORLD_SIZE = 4000;
-        const GRID_SPACING = 40;
-        const PELLET_COUNT = 2000;
-        const AI_COUNT = 15;
-        const VIRUS_COUNT = 15;
-        const EXP_VIRUS_COUNT = 5;
+        // Game Constants (some will be configurable in admin mode)
+        let WORLD_SIZE = 4000;
+        let GRID_SPACING = 40;
+        let PELLET_COUNT = 2000;
+        let AI_COUNT = 15;
+        let VIRUS_COUNT = 15;
+        let EXP_VIRUS_COUNT = 5;
         const MIN_SCALE = 0.5;
         const MAX_SCALE = 1.0;
-        const MIN_SPEED = 2;
-        const MAX_SPEED = 5;
+        let MIN_SPEED = 2;
+        let MAX_SPEED = 5;
+        let PLAYER_SPEED_MULTIPLIER = 1.0;
+        let AI_SPEED_MULTIPLIER = 1.0;
         const MIN_BLOB_SIZE = 20;
         const MAX_BLOB_SIZE = 2000;
-        const BASE_SIZE = 30;
+        let BASE_SIZE = 30;
+        let START_MASS = 10;
         const PELLET_SIZE = 10;
+        const BIG_PELLET_SIZE = 25;
+        const BIG_PELLET_MASS = 100;
         const VIRUS_SIZE = 100;
         const EXP_VIRUS_SIZE = 120;
         const SPLIT_DELAY = 30000; // 30 seconds
-        const MAX_SPLITS = 10;
+        const MAX_SPLITS = 16; // Increased from 10
+        let SPLIT_FORCE = 10; // Adjustable in admin mode
         const COVERAGE_REQUIRED = 0.5; // Require 50% coverage to eat another blob
         const COLORS = [
             '#FF5733', '#33FF57', '#3357FF', '#FF33F5', '#F5FF33',
             '#33FFF5', '#FF3333', '#33FF33', '#3333FF', '#FF33FF',
-            '#FFFF33', '#33FFFF', '#FF8333', '#83FF33', '#8333FF'
+            '#FFFF33', '#33FFFF', '#FF8333', '#83FF33', '#8333FF',
+            '#FF33A8', '#A8FF33', '#33A8FF', '#FFA833', '#A833FF',
+            '#33FFA8', '#A833FF', '#FFA833', '#33FFA8', '#A8FF33',
+            '#FFA833', '#33FFA8', '#A8FF33', '#A833FF', '#33A8FF',
+            '#FF33A8', '#A8FF33', '#33FF33', '#33FF33', '#33FF33', 
+            '#FF00FF'
         ];
         const TEAM_COLORS = {
             red: '#FF3333',
@@ -383,6 +729,11 @@
             'Good Boy'
         ];
 
+        // Admin mode variables
+        let enableBigPellets = false;
+        let noCollision = false;
+        let rainbowMode = false;
+
         // Game Variables
         let canvas, ctx;
         let player = null;
@@ -396,8 +747,13 @@
         let keys = { up: false, down: false, left: false, right: false };
         let lastFrameTime = 0;
         let gameStarted = false;
-        let gameMode = 'ffa'; // 'ffa' or 'teams'
+        let gameMode = 'ffa'; // 'ffa', 'teams', or 'admin'
         let teamMass = { red: 0, green: 0, blue: 0 };
+        let teamHistory = { red: [0], green: [0], blue: [0] };
+        let teamHighScores = { red: 0, green: 0, blue: 0 };
+        let historyUpdateInterval = null;
+        let dyingCells = []; // For death animation
+        let rainbowInterval = null; // For rainbow mode
 
         // Initialize game
         function init() {
@@ -439,11 +795,96 @@
             document.addEventListener('keydown', handleKeyDown);
             document.addEventListener('keyup', handleKeyUp);
             
+            // Admin panel listeners
+            setupAdminPanel();
+            
             // Create initial world
             generateWorld();
             
             // Start render loop
             requestAnimationFrame(gameLoop);
+        }
+
+        // Set up admin panel controls
+        function setupAdminPanel() {
+            const controls = {
+                'world-size': value => WORLD_SIZE = parseInt(value),
+                'grid-spacing': value => GRID_SPACING = parseInt(value),
+                'min-speed': value => MIN_SPEED = parseFloat(value),
+                'max-speed': value => MAX_SPEED = parseFloat(value),
+                'base-size': value => BASE_SIZE = parseInt(value),
+                'split-force': value => SPLIT_FORCE = parseInt(value),
+                'split-delay': value => SPLIT_DELAY = parseInt(value),
+                'max-splits': value => MAX_SPLITS = parseInt(value),
+                'pellet-count': value => PELLET_COUNT = parseInt(value),
+                'virus-count': value => VIRUS_COUNT = parseInt(value),
+                'exp-virus-count': value => EXP_VIRUS_COUNT = parseInt(value),
+                'ai-count': value => AI_COUNT = parseInt(value),
+                'start-mass': value => {
+                    START_MASS = parseInt(value);
+                    BASE_SIZE = calculateSize(START_MASS);
+                },
+                'player-speed': value => PLAYER_SPEED_MULTIPLIER = parseFloat(value) / 3,
+                'ai-speed': value => AI_SPEED_MULTIPLIER = parseFloat(value) / 3
+            };
+
+            // Set up event listeners for all controls
+            Object.keys(controls).forEach(id => {
+                const slider = document.getElementById(id);
+                const valueDisplay = document.getElementById(`${id}-value`);
+                
+                slider.addEventListener('input', function() {
+                    valueDisplay.textContent = this.value;
+                    controls[id](this.value);
+                    
+                    // Save settings to localStorage
+                    localStorage.setItem(`admin_${id}`, this.value);
+                });
+                
+                // Load saved settings
+                const savedValue = localStorage.getItem(`admin_${id}`);
+                if (savedValue !== null) {
+                    slider.value = savedValue;
+                    valueDisplay.textContent = savedValue;
+                    controls[id](savedValue);
+                }
+            });
+
+            // Special features
+            ['big-pellets', 'no-collision', 'rainbow-mode'].forEach(id => {
+                const checkbox = document.getElementById(id);
+                checkbox.addEventListener('change', function() {
+                    window[id.replace('-', '')] = this.checked;
+                    localStorage.setItem(`admin_${id}`, this.checked);
+                });
+                
+                // Load saved settings
+                const savedValue = localStorage.getItem(`admin_${id}`);
+                if (savedValue !== null) {
+                    checkbox.checked = savedValue === 'true';
+                    window[id.replace('-', '')] = checkbox.checked;
+                }
+            });
+
+            // Reset settings button
+            document.getElementById('reset-settings').addEventListener('click', function() {
+                if (confirm('Reset all admin settings to default values?')) {
+                    Object.keys(controls).forEach(id => {
+                        const slider = document.getElementById(id);
+                        slider.value = slider.defaultValue;
+                        document.getElementById(`${id}-value`).textContent = slider.defaultValue;
+                        controls[id](slider.defaultValue);
+                        localStorage.removeItem(`admin_${id}`);
+                    });
+                    
+                    ['big-pellets', 'no-collision', 'rainbow-mode'].forEach(id => {
+                        const checkbox = document.getElementById(id);
+                        checkbox.checked = false;
+                        window[id.replace('-', '')] = false;
+                        localStorage.removeItem(`admin_${id}`);
+                    });
+                }
+            });
         }
 
         // Resize canvas to fit window
@@ -455,16 +896,13 @@
         // Generate initial world entities
         function generateWorld() {
             // Generate pellets
+            pellets = [];
             for (let i = 0; i < PELLET_COUNT; i++) {
-                pellets.push({
-                    x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
-                    y: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
-                    size: PELLET_SIZE,
-                    color: getRandomColor()
-                });
+                addPellet();
             }
             
             // Generate viruses
+            viruses = [];
             for (let i = 0; i < VIRUS_COUNT; i++) {
                 viruses.push({
                     x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
@@ -475,6 +913,7 @@
             }
             
             // Generate experimental viruses
+            expViruses = [];
             for (let i = 0; i < EXP_VIRUS_COUNT; i++) {
                 expViruses.push({
                     x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
@@ -489,14 +928,43 @@
             }
         }
 
+        // Add a regular pellet
+        function addPellet() {
+            pellets.push({
+                x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
+                y: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
+                size: PELLET_SIZE,
+                mass: 1,
+                color: getRandomColor(),
+                isBig: false
+            });
+        }
+
+        // Add a big pellet (admin mode)
+        function addBigPellet() {
+            pellets.push({
+                x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
+                y: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
+                size: BIG_PELLET_SIZE,
+                mass: BIG_PELLET_MASS,
+                color: getRandomColor(),
+                isBig: true
+            });
+        }
+
         // Generate pellets around experimental virus
         function generateExpVirusPellets(virus, count) {
+            if (!virus.pellets) {
+                virus.pellets = [];
+            }
+            
             const radius = virus.size + 30;
             for (let i = 0; i < count; i++) {
                 const angle = Math.random() * Math.PI * 2;
+                const distance = radius + Math.random() * 20;
                 virus.pellets.push({
-                    x: virus.x + Math.cos(angle) * radius,
-                    y: virus.y + Math.sin(angle) * radius,
+                    x: Math.cos(angle) * distance,
+                    y: Math.sin(angle) * distance,
                     size: PELLET_SIZE,
                     color: getRandomColor()
                 });
@@ -513,33 +981,81 @@
                 playerTeam = 'red';
             }
             
-            // Reset team mass
+            // Reset team mass and history
             teamMass = { red: 0, green: 0, blue: 0 };
+            
+            // Start team history tracking for teams mode
+            if (gameMode === 'teams') {
+                teamHistory = { red: [0], green: [0], blue: [0] };
+                teamHighScores = { red: 0, green: 0, blue: 0 };
+                
+                // Update team history every few seconds
+                if (historyUpdateInterval) {
+                    clearInterval(historyUpdateInterval);
+                }
+                
+                historyUpdateInterval = setInterval(() => {
+                    for (const team in teamMass) {
+                        teamHistory[team].push(teamMass[team]);
+                        // Keep history length reasonable
+                        if (teamHistory[team].length > 20) {
+                            teamHistory[team].shift();
+                        }
+                        
+                        // Update high scores
+                        if (teamMass[team] > teamHighScores[team]) {
+                            teamHighScores[team] = teamMass[team];
+                        }
+                    }
+                    
+                    // Update team stats display
+                    updateTeamStats();
+                }, 5000);
+            }
             
             // Create player
             let playerColor = gameMode === 'teams' ? TEAM_COLORS[playerTeam] : getRandomColor();
             
+            // Random starting position
+            const startX = (Math.random() - 0.5) * (WORLD_SIZE * 0.8);
+            const startY = (Math.random() - 0.5) * (WORLD_SIZE * 0.8);
+            
             player = {
                 blobs: [{
-                    x: 0,
-                    y: 0,
+                    x: startX,
+                    y: startY,
                     size: BASE_SIZE,
-                    mass: 10,
+                    mass: START_MASS,
                     dx: 0,
                     dy: 0,
                     color: playerColor,
                     createdAt: Date.now()
                 }],
                 name: playerName,
-                totalMass: 10,
+                totalMass: START_MASS,
                 team: gameMode === 'teams' ? playerTeam : null
             };
+            
+            // Start rainbow mode if enabled
+            if (rainbowMode) {
+                if (rainbowInterval) {
+                    clearInterval(rainbowInterval);
+                }
+                
+                rainbowInterval = setInterval(() => {
+                    // Change player color
+                    const color = getRandomColor();
+                    for (let i = 0; i < player.blobs.length; i++) {
+                        player.blobs[i].color = color;
+                    }
+                }, 500);
+            }
             
             // Create AI players
             blobs = []; // Clear existing blobs
             
             for (let i = 0; i < AI_COUNT; i++) {
-                const aiName = AI_NAMES[i % AI_NAMES.length];
+                const aiName = AI_NAMES[Math.floor(Math.random() * AI_NAMES.length)];
                 let aiColor, aiTeam;
                 
                 if (gameMode === 'teams') {
@@ -560,14 +1076,14 @@
                         x: x,
                         y: y,
                         size: BASE_SIZE,
-                        mass: 10,
+                        mass: START_MASS,
                         dx: 0,
                         dy: 0,
                         color: aiColor,
                         createdAt: Date.now()
                     }],
                     name: aiName,
-                    totalMass: 10,
+                    totalMass: START_MASS,
                     isAI: true,
                     targetX: x,
                     targetY: y,
@@ -576,17 +1092,29 @@
                 });
             }
             
+            // Add some big pellets if enabled
+            if (enableBigPellets) {
+                for (let i = 0; i < PELLET_COUNT * 0.05; i++) {
+                    addBigPellet();
+                }
+            }
+            
             // Hide menu, show game UI
             document.getElementById('menu').style.display = 'none';
             document.getElementById('leaderboard').style.display = 'block';
             document.getElementById('controls').style.display = 'block';
             
-            // Show team dominance chart if in teams mode
+            // Show team dominance and stats chart if in teams mode
             if (gameMode === 'teams') {
                 document.getElementById('team-dominance').style.display = 'block';
+                document.getElementById('team-stats').style.display = 'block';
             } else {
                 document.getElementById('team-dominance').style.display = 'none';
+                document.getElementById('team-stats').style.display = 'none';
             }
+            
+            // Show admin panel in admin mode
+            document.getElementById('admin-panel').style.display = gameMode === 'admin' ? 'block' : 'none';
             
             gameStarted = true;
         }
@@ -611,6 +1139,7 @@
             }
             
             updateAI(dt);
+            updateDyingCells(dt);
             checkCollisions();
             updateLeaderboard();
             
@@ -623,13 +1152,13 @@
             if (pellets.length < PELLET_COUNT / 2) {
                 const newPellets = PELLET_COUNT - pellets.length;
                 for (let i = 0; i < newPellets; i++) {
-                    pellets.push({
-                        x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
-                        y: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
-                        size: PELLET_SIZE,
-                        color: getRandomColor()
-                    });
+                    addPellet();
                 }
+            }
+            
+            // Add occasional big pellet if enabled
+            if (enableBigPellets && Math.random() < 0.01) {
+                addBigPellet();
             }
         }
 
@@ -654,7 +1183,67 @@
                 }
                 
                 // Calculate speed based on mass (larger = slower)
-                const speed = MAX_SPEED - (blob.mass / 500) * (MAX_SPEED - MIN_SPEED);
+                const speed = (MAX_SPEED - (blob.mass / 500) * (MAX_SPEED - MIN_SPEED)) * PLAYER_SPEED_MULTIPLIER;
+                const finalSpeed = Math.max(MIN_SPEED, speed);
+                
+                // Set velocity
+                blob.dx = moveX * finalSpeed;
+                blob.dy = moveY * finalSpeed;
+                
+                // Update position
+                blob.x += blob.dx;
+                blob.y += blob.dy;
+                
+                // Keep player blob within world bounds
+                blob.x = Math.max(-WORLD_SIZE / 2, Math.min(WORLD_SIZE / 2, blob.x));
+                blob.y = Math.max(-WORLD_SIZE / 2, Math.min(WORLD_SIZE / 2, blob.y));
+            }
+            
+            // Check if blobs can merge back together
+            mergeBlobsIfPossible(player);
+            
+            // Update camera to center on player's center of mass
+            if (player.blobs.length > 0) {
+                let centerX = 0, centerY = 0, totalMass = 0;
+                for (let i = 0; i < player.blobs.length; i++) {
+                    centerX += player.blobs[i].x * player.blobs[i].mass;
+                    centerY += player.blobs[i].y * player.blobs[i].mass;
+                    totalMass += player.blobs[i].mass;
+                }
+                centerX /= totalMass;
+                for (let i = 0; i < newPellets; i++) {
+                    addPellet();
+                }
+            }
+            
+            // Add occasional big pellet if enabled
+            if (enableBigPellets && Math.random() < 0.01) {
+                addBigPellet();
+            }
+        }
+
+        // Update player position
+        function updatePlayer(dt) {
+            // Calculate direction based on keys
+            const targetDx = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
+            const targetDy = (keys.down ? 1 : 0) - (keys.up ? 1 : 0);
+            
+            // Update each player blob
+            for (let i = 0; i < player.blobs.length; i++) {
+                const blob = player.blobs[i];
+                
+                // Normalize movement if diagonal
+                const mag = Math.sqrt(targetDx * targetDx + targetDy * targetDy);
+                let moveX = targetDx;
+                let moveY = targetDy;
+                
+                if (mag > 0) {
+                    moveX = targetDx / mag;
+                    moveY = targetDy / mag;
+                }
+                
+                // Calculate speed based on mass (larger = slower)
+                const speed = (MAX_SPEED - (blob.mass / 500) * (MAX_SPEED - MIN_SPEED)) * PLAYER_SPEED_MULTIPLIER;
                 const finalSpeed = Math.max(MIN_SPEED, speed);
                 
                 // Set velocity
@@ -722,10 +1311,12 @@
                 
                 for (let j = 0; j < pellets.length; j++) {
                     const pellet = pellets[j];
-                    const dist = distance(ai.blobs[0].x, ai.blobs[0].y, pellet.x, pellet.y);
-                    if (dist < closestPelletDist) {
-                        closestPellet = pellet;
-                        closestPelletDist = dist;
+                    if (ai.blobs.length > 0) {
+                        const dist = distance(ai.blobs[0].x, ai.blobs[0].y, pellet.x, pellet.y);
+                        if (dist < closestPelletDist) {
+                            closestPellet = pellet;
+                            closestPelletDist = dist;
+                        }
                     }
                 }
                 
@@ -738,7 +1329,7 @@
                     // In teams mode, only chase players from different teams
                     const canChasePlayer = gameMode !== 'teams' || ai.team !== player.team;
                     
-                    if (canChasePlayer) {
+                    if (canChasePlayer && ai.blobs.length > 0) {
                         for (let j = 0; j < player.blobs.length; j++) {
                             const playerBlob = player.blobs[j];
                             const dist = distance(ai.blobs[0].x, ai.blobs[0].y, playerBlob.x, playerBlob.y);
@@ -759,7 +1350,7 @@
                     // In teams mode, only chase AIs from different teams
                     const canChaseAI = gameMode !== 'teams' || ai.team !== blobs[j].team;
                     
-                    if (canChaseAI) {
+                    if (canChaseAI && ai.blobs.length > 0 && blobs[j].blobs.length > 0) {
                         for (let k = 0; k < blobs[j].blobs.length; k++) {
                             const otherBlob = blobs[j].blobs[k];
                             const dist = distance(ai.blobs[0].x, ai.blobs[0].y, otherBlob.x, otherBlob.y);
@@ -799,7 +1390,7 @@
                     }
                     
                     // Calculate speed based on mass
-                    const speed = MAX_SPEED - (blob.mass / 500) * (MAX_SPEED - MIN_SPEED);
+                    const speed = (MAX_SPEED - (blob.mass / 500) * (MAX_SPEED - MIN_SPEED)) * AI_SPEED_MULTIPLIER;
                     const finalSpeed = Math.max(MIN_SPEED, speed);
                     
                     // Set velocity
@@ -816,7 +1407,7 @@
                 }
                 
                 // Randomly split AI if it's large enough
-                if (ai.blobs.length < 3 && ai.blobs[0].mass > 100 && Math.random() < 0.001) {
+                if (ai.blobs.length < 3 && ai.blobs.length > 0 && ai.blobs[0].mass > 100 && Math.random() < 0.001) {
                     splitBlob(ai, 0);
                 }
                 
@@ -825,318 +1416,379 @@
             }
         }
 
+        // Update dying cells
+        function updateDyingCells(dt) {
+            for (let i = dyingCells.length - 1; i >= 0; i--) {
+                const cell = dyingCells[i];
+                
+                // Update animation
+                cell.opacity -= dt * 2; // Fade out
+                cell.size += dt * 30;   // Expand
+                
+                // Remove completed animations
+                if (cell.opacity <= 0) {
+                    dyingCells.splice(i, 1);
+                }
+            }
+        }
+
         // Check all game collisions
         function checkCollisions() {
-    // Reset team mass for this frame
-    teamMass = { red: 0, green: 0, blue: 0 };
-    
-    // Player blob collisions
-    if (player) {
-        for (let i = 0; i < player.blobs.length; i++) {
-            const blob = player.blobs[i];
+            // Reset team mass for this frame
+            teamMass = { red: 0, green: 0, blue: 0 };
             
-            // Check pellet collisions
-            for (let j = pellets.length - 1; j >= 0; j--) {
-                const pellet = pellets[j];
-                if (circleCollision(blob, pellet)) {
-                    // Consume pellet
-                    blob.mass += 1;
-                    blob.size = calculateSize(blob.mass);
-                    pellets.splice(j, 1);
-                }
-            }
-            
-            // Check experimental virus pellet collisions
-            for (let j = 0; j < expViruses.length; j++) {
-                const expVirus = expViruses[j];
-                
-                for (let k = expVirus.pellets.length - 1; k >= 0; k--) {
-                    const pellet = expVirus.pellets[k];
-                    const pelletAbs = {
-                        x: expVirus.x + pellet.x,
-                        y: expVirus.y + pellet.y,
-                        size: pellet.size
-                    };
+            // Player blob collisions
+            if (player) {
+                for (let i = 0; i < player.blobs.length; i++) {
+                    const blob = player.blobs[i];
                     
-                    if (circleCollision(blob, pelletAbs)) {
-                        // Consume virus pellet
-                        blob.mass += 1;
-                        blob.size = calculateSize(blob.mass);
-                        expVirus.pellets.splice(k, 1);
-                    }
-                }
-                
-                // Replenish exp virus pellets
-                if (expVirus.pellets.length < 10 && Math.random() < 0.05) {
-                    generateExpVirusPellets(expVirus, 1);
-                }
-                
-                // Check if player blob is consumed by experimental virus
-                if (blob.mass < expVirus.mass && hasEnoughCoverage(expVirus, blob)) {
-                    // Blob is consumed by virus, generate more pellets
-                    generateExpVirusPellets(expVirus, Math.floor(blob.mass / 5));
-                    player.blobs.splice(i, 1);
-                    i--;
-                    if (player.blobs.length === 0) {
-                        gameOver();
-                    }
-                    break;
-                }
-            }
-            
-            // Check green virus collisions
-            for (let j = viruses.length - 1; j >= 0; j--) {
-                const virus = viruses[j];
-                
-                if (blob.mass > virus.mass && hasEnoughCoverage(blob, virus)) {
-                    // Virus splits player without reducing mass
-                    splitBlobByVirus(player, i);
-                    viruses.splice(j, 1);
-                    
-                    // Add new virus elsewhere
-                    viruses.push({
-                        x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
-                        y: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
-                        size: VIRUS_SIZE,
-                        mass: 200
-                    });
-                    
-                    break;
-                }
-            }
-            
-            // Check collisions with other players/AI
-            for (let j = 0; j < blobs.length; j++) {
-                const otherPlayer = blobs[j];
-                
-                // In teams mode, skip teammates
-                if (gameMode === 'teams' && player.team === otherPlayer.team) {
-                    continue;
-                }
-                
-                for (let k = otherPlayer.blobs.length - 1; k >= 0; k--) {
-                    const otherBlob = otherPlayer.blobs[k];
-                    
-                    if (circleCollision(blob, otherBlob) && hasEnoughCoverage(blob, otherBlob)) {
-                        // Check which blob is bigger
-                        if (blob.mass > otherBlob.mass * 1.2) {
-                            // Player eats AI blob
-                            blob.mass += otherBlob.mass;
+                    // Check pellet collisions
+                    for (let j = pellets.length - 1; j >= 0; j--) {
+                        const pellet = pellets[j];
+                        if (circleCollision(blob, pellet)) {
+                            // Consume pellet
+                            blob.mass += pellet.mass || 1; // Regular pellet = 1 mass, big pellet = 100 mass
                             blob.size = calculateSize(blob.mass);
-                            otherPlayer.blobs.splice(k, 1);
-                            
-                            // Check if AI is eliminated
-                            if (otherPlayer.blobs.length === 0) {
-                                blobs.splice(j, 1);
-                                j--;
-                                
-                                // Add a new AI
-                                addNewAI();
-                                break;
-                            }
+                            pellets.splice(j, 1);
                         }
                     }
-                }
-            }
-        }
-        
-        // Update player total mass
-        player.totalMass = 0;
-        for (let i = 0; i < player.blobs.length; i++) {
-            player.totalMass += player.blobs[i].mass;
-        }
-        
-        // Update team mass
-        if (gameMode === 'teams' && player.team) {
-            teamMass[player.team] += player.totalMass;
-        }
-    }
-    
-    // AI blob collisions
-    for (let i = 0; i < blobs.length; i++) {
-        const ai = blobs[i];
-        
-        for (let j = 0; j < ai.blobs.length; j++) {
-            const blob = ai.blobs[j];
-            
-            // Check pellet collisions
-            for (let k = pellets.length - 1; k >= 0; k--) {
-                const pellet = pellets[k];
-                if (circleCollision(blob, pellet)) {
-                    // Consume pellet
-                    blob.mass += 1;
-                    blob.size = calculateSize(blob.mass);
-                    pellets.splice(k, 1);
-                }
-            }
-            
-            // Check experimental virus pellet collisions
-            for (let k = 0; k < expViruses.length; k++) {
-                const expVirus = expViruses[k];
-                
-                for (let l = expVirus.pellets.length - 1; l >= 0; l--) {
-                    const pellet = expVirus.pellets[l];
-                    const pelletAbs = {
-                        x: expVirus.x + pellet.x,
-                        y: expVirus.y + pellet.y,
-                        size: pellet.size
-                    };
                     
-                    if (circleCollision(blob, pelletAbs)) {
-                        // Consume virus pellet
-                        blob.mass += 1;
-                        blob.size = calculateSize(blob.mass);
-                        expVirus.pellets.splice(l, 1);
-                    }
-                }
-                
-                // Check if AI blob is consumed by experimental virus
-                if (blob.mass < expVirus.mass && hasEnoughCoverage(expVirus, blob)) {
-                    // Blob is consumed by virus, generate more pellets
-                    generateExpVirusPellets(expVirus, Math.floor(blob.mass / 5));
-                    ai.blobs.splice(j, 1);
-                    j--;
-                    
-                    // Check if AI is eliminated
-                    if (ai.blobs.length === 0) {
-                        blobs.splice(i, 1);
-                        i--;
+                    // Check experimental virus pellet collisions
+                    for (let j = 0; j < expViruses.length; j++) {
+                        const expVirus = expViruses[j];
                         
-                        // Add a new AI
-                        addNewAI();
-                        break;
-                    }
-                    break;
-                }
-            }
-            
-            // Check green virus collisions
-            for (let k = viruses.length - 1; k >= 0; k--) {
-                const virus = viruses[k];
-                
-                if (blob.mass > virus.mass && hasEnoughCoverage(blob, virus)) {
-                    // Virus splits AI
-                    splitBlobByVirus(ai, j);
-                    viruses.splice(k, 1);
-                    
-                    // Add new virus elsewhere
-                    viruses.push({
-                        x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
-                        y: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
-                        size: VIRUS_SIZE,
-                        mass: 200
-                    });
-                    
-                    break;
-                }
-            }
-            
-            // Check collisions with player
-            if (player) {
-                // In teams mode, skip teammates
-                if (!(gameMode === 'teams' && ai.team === player.team)) {
-                    for (let k = player.blobs.length - 1; k >= 0; k--) {
-                        const playerBlob = player.blobs[k];
-                        
-                        if (circleCollision(blob, playerBlob) && hasEnoughCoverage(blob, playerBlob)) {
-                            // Check which blob is bigger
-                            if (blob.mass > playerBlob.mass * 1.2) {
-                                // AI eats player blob
-                                blob.mass += playerBlob.mass;
+                        for (let k = expVirus.pellets.length - 1; k >= 0; k--) {
+                            const pellet = expVirus.pellets[k];
+                            const pelletAbs = {
+                                x: expVirus.x + pellet.x,
+                                y: expVirus.y + pellet.y,
+                                size: pellet.size
+                            };
+                            
+                            // Fix: Use absolute coordinates for collision check
+                            if (circleCollision({
+                                x: blob.x,
+                                y: blob.y,
+                                size: blob.size
+                            }, {
+                                x: expVirus.x + pellet.x,
+                                y: expVirus.y + pellet.y,
+                                size: pellet.size
+                            })) {
+                                // Consume virus pellet
+                                blob.mass += 1;
                                 blob.size = calculateSize(blob.mass);
-                                player.blobs.splice(k, 1);
-                                
-                                // Check if player is eliminated
-                                if (player.blobs.length === 0) {
-                                    gameOver();
-                                    break;
+                                expVirus.pellets.splice(k, 1);
+                            }
+                        }
+                        
+                        // Replenish exp virus pellets
+                        if (expVirus.pellets.length < 10 && Math.random() < 0.05) {
+                            generateExpVirusPellets(expVirus, 1);
+                        }
+                        
+                        // Check if player blob is consumed by experimental virus
+                        if (blob.mass < expVirus.mass && hasEnoughCoverage(expVirus, blob) && !noCollision) {
+                            // Add death animation
+                            addDeathAnimation(blob);
+                            
+                            // Blob is consumed by virus, generate more pellets
+                            generateExpVirusPellets(expVirus, Math.floor(blob.mass / 5));
+                            player.blobs.splice(i, 1);
+                            i--;
+                            if (player.blobs.length === 0) {
+                                gameOver();
+                            }
+                            break;
+                        }
+                    }
+                    
+                    // Check green virus collisions - fixed to properly split without reducing mass
+                    for (let j = viruses.length - 1; j >= 0; j--) {
+                        const virus = viruses[j];
+                        
+                        if (blob.mass > virus.mass && hasEnoughCoverage(blob, virus) && !noCollision) {
+                            // Virus splits player without reducing mass
+                            splitBlobByVirus(player, i);
+                            viruses.splice(j, 1);
+                            
+                            // Add new virus elsewhere
+                            viruses.push({
+                                x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
+                                y: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
+                                size: VIRUS_SIZE,
+                                mass: 200
+                            });
+                            
+                            break;
+                        }
+                    }
+                    
+                    // Check collisions with other players/AI
+                    for (let j = 0; j < blobs.length; j++) {
+                        const otherPlayer = blobs[j];
+                        
+                        // In teams mode, skip teammates
+                        if (gameMode === 'teams' && player.team === otherPlayer.team) {
+                            continue;
+                        }
+                        
+                        for (let k = otherPlayer.blobs.length - 1; k >= 0; k--) {
+                            const otherBlob = otherPlayer.blobs[k];
+                            
+                            if (circleCollision(blob, otherBlob) && hasEnoughCoverage(blob, otherBlob)) {
+                                // Check which blob is bigger
+                                if (blob.mass > otherBlob.mass * 1.2) {
+                                    // Add death animation
+                                    addDeathAnimation(otherBlob);
+                                    
+                                    // Player eats AI blob
+                                    blob.mass += otherBlob.mass;
+                                    blob.size = calculateSize(blob.mass);
+                                    otherPlayer.blobs.splice(k, 1);
+                                    
+                                    // Check if AI is eliminated
+                                    if (otherPlayer.blobs.length === 0) {
+                                        blobs.splice(j, 1);
+                                        j--;
+                                        
+                                        // Add a new AI
+                                        addNewAI();
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
-            
-            // Check collisions with other AI
-            for (let k = 0; k < blobs.length; k++) {
-                if (i === k) continue; // Skip self
                 
-                const otherAI = blobs[k];
-                
-                // In teams mode, skip teammates
-                if (gameMode === 'teams' && ai.team === otherAI.team) {
-                    continue;
+                // Update player total mass
+                player.totalMass = 0;
+                for (let i = 0; i < player.blobs.length; i++) {
+                    player.totalMass += player.blobs[i].mass;
                 }
                 
-                for (let l = otherAI.blobs.length - 1; l >= 0; l--) {
-                    const otherBlob = otherAI.blobs[l];
+                // Update team mass
+                if (gameMode === 'teams' && player.team) {
+                    teamMass[player.team] += player.totalMass;
+                }
+            }
+            
+            // AI blob collisions
+            for (let i = 0; i < blobs.length; i++) {
+                const ai = blobs[i];
+                
+                for (let j = 0; j < ai.blobs.length; j++) {
+                    const blob = ai.blobs[j];
                     
-                    if (circleCollision(blob, otherBlob) && hasEnoughCoverage(blob, otherBlob)) {
-                        // Check which blob is bigger
-                        if (blob.mass > otherBlob.mass * 1.2) {
-                            // AI eats other AI blob
-                            blob.mass += otherBlob.mass;
+                    // Check pellet collisions
+                    for (let k = pellets.length - 1; k >= 0; k--) {
+                        const pellet = pellets[k];
+                        if (circleCollision(blob, pellet)) {
+                            // Consume pellet
+                            blob.mass += pellet.mass || 1;
                             blob.size = calculateSize(blob.mass);
-                            otherAI.blobs.splice(l, 1);
+                            pellets.splice(k, 1);
+                        }
+                    }
+                    
+                    // Check experimental virus pellet collisions
+                    for (let k = 0; k < expViruses.length; k++) {
+                        const expVirus = expViruses[k];
+                        
+                        for (let l = expVirus.pellets.length - 1; l >= 0; l--) {
+                            const pellet = expVirus.pellets[l];
                             
-                            // Check if other AI is eliminated
-                            if (otherAI.blobs.length === 0) {
-                                blobs.splice(k, 1);
-                                if (k < i) i--;
-                                k--;
+                            // Fix: Use absolute coordinates for collision check
+                            if (circleCollision({
+                                x: blob.x,
+                                y: blob.y,
+                                size: blob.size
+                            }, {
+                                x: expVirus.x + pellet.x,
+                                y: expVirus.y + pellet.y,
+                                size: pellet.size
+                            })) {
+                                // Consume virus pellet
+                                blob.mass += 1;
+                                blob.size = calculateSize(blob.mass);
+                                expVirus.pellets.splice(l, 1);
+                            }
+                        }
+                        
+                        // Check if AI blob is consumed by experimental virus
+                        if (blob.mass < expVirus.mass && hasEnoughCoverage(expVirus, blob) && !noCollision) {
+                            // Add death animation
+                            addDeathAnimation(blob);
+                            
+                            // Blob is consumed by virus, generate more pellets
+                            generateExpVirusPellets(expVirus, Math.floor(blob.mass / 5));
+                            ai.blobs.splice(j, 1);
+                            j--;
+                            
+                            // Check if AI is eliminated
+                            if (ai.blobs.length === 0) {
+                                blobs.splice(i, 1);
+                                i--;
                                 
                                 // Add a new AI
                                 addNewAI();
                                 break;
                             }
+                            break;
                         }
+                    }
+                    
+                    // Check green virus collisions - fixed to properly split without reducing mass
+                    for (let k = viruses.length - 1; k >= 0; k--) {
+                        const virus = viruses[k];
+                        
+                        if (blob.mass > virus.mass && hasEnoughCoverage(blob, virus) && !noCollision) {
+                            // Virus splits AI without reducing mass
+                            splitBlobByVirus(ai, j);
+                            viruses.splice(k, 1);
+                            
+                            // Add new virus elsewhere
+                            viruses.push({
+                                x: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
+                                y: Math.random() * WORLD_SIZE - WORLD_SIZE / 2,
+                                size: VIRUS_SIZE,
+                                mass: 200
+                            });
+                            
+                            break;
+                        }
+                    }
+                    
+                    // Check collisions with player
+                    if (player) {
+                        // In teams mode, skip teammates
+                        if (!(gameMode === 'teams' && ai.team === player.team)) {
+                            for (let k = player.blobs.length - 1; k >= 0; k--) {
+                                const playerBlob = player.blobs[k];
+                                
+                                if (circleCollision(blob, playerBlob) && hasEnoughCoverage(blob, playerBlob)) {
+                                    // Check which blob is bigger
+                                    if (blob.mass > playerBlob.mass * 1.2) {
+                                        // Add death animation
+                                        addDeathAnimation(playerBlob);
+                                        
+                                        // AI eats player blob
+                                        blob.mass += playerBlob.mass;
+                                        blob.size = calculateSize(blob.mass);
+                                        player.blobs.splice(k, 1);
+                                        
+                                        // Check if player is eliminated
+                                        if (player.blobs.length === 0) {
+                                            gameOver();
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Check collisions with other AI
+                    for (let k = 0; k < blobs.length; k++) {
+                        if (i === k) continue; // Skip self
+                        
+                        const otherAI = blobs[k];
+                        
+                        // In teams mode, skip teammates
+                        if (gameMode === 'teams' && ai.team === otherAI.team) {
+                            continue;
+                        }
+                        
+                        for (let l = otherAI.blobs.length - 1; l >= 0; l--) {
+                            const otherBlob = otherAI.blobs[l];
+                            
+                            if (circleCollision(blob, otherBlob) && hasEnoughCoverage(blob, otherBlob)) {
+                                // Check which blob is bigger
+                                if (blob.mass > otherBlob.mass * 1.2) {
+                                    // Add death animation
+                                    addDeathAnimation(otherBlob);
+                                    
+                                    // AI eats other AI blob
+                                    blob.mass += otherBlob.mass;
+                                    blob.size = calculateSize(blob.mass);
+                                    otherAI.blobs.splice(l, 1);
+                                    
+                                    // Check if other AI is eliminated
+                                    if (otherAI.blobs.length === 0) {
+                                        blobs.splice(k, 1);
+                                        if (k < i) i--;
+                                        k--;
+                                        
+                                        // Add a new AI
+                                        addNewAI();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Update AI total mass - only if the AI still exists
+                if (ai && ai.blobs && ai.blobs.length > 0) {
+                    ai.totalMass = 0;
+                    for (let j = 0; j < ai.blobs.length; j++) {
+                        ai.totalMass += ai.blobs[j].mass;
+                    }
+                    
+                    // Update team mass
+                    if (gameMode === 'teams' && ai.team) {
+                        teamMass[ai.team] += ai.totalMass;
                     }
                 }
             }
         }
-        
-        // Update AI total mass - only if the AI still exists
-        if (ai && ai.blobs && ai.blobs.length > 0) {
-            ai.totalMass = 0;
-            for (let j = 0; j < ai.blobs.length; j++) {
-                ai.totalMass += ai.blobs[j].mass;
-            }
-            
-            // Update team mass
-            if (gameMode === 'teams' && ai.team) {
-                teamMass[ai.team] += ai.totalMass;
+
+        // Add death animation effect
+        function addDeathAnimation(blob) {
+            for (let i = 0; i < 8; i++) {
+                const angle = (i / 8) * Math.PI * 2;
+                dyingCells.push({
+                    x: blob.x + Math.cos(angle) * blob.size * 0.5,
+                    y: blob.y + Math.sin(angle) * blob.size * 0.5,
+                    size: blob.size * 0.3,
+                    opacity: 1.0,
+                    color: blob.color
+                });
             }
         }
-    }
-}
 
         // Split a blob in half voluntarily (player pressing space)
         function splitBlob(entity, index) {
             const blob = entity.blobs[index];
             
-            // Only split if blob is big enough
             if (blob.mass < 20 || entity.blobs.length >= MAX_SPLITS) return;
             
-            // Calculate new mass
             const newMass = blob.mass / 2;
             blob.mass = newMass;
             blob.size = calculateSize(blob.mass);
             
-            // Create new blob in the direction of movement
-            let angle = 0;
+            // Enhanced split mechanics
+            let angle;
             if (entity === player) {
-                // For player, use movement direction
                 angle = Math.atan2(blob.dy, blob.dx);
                 if (blob.dx === 0 && blob.dy === 0) {
-                    // If not moving, use random direction
                     angle = Math.random() * Math.PI * 2;
                 }
             } else {
-                // For AI, use direction to target
                 angle = Math.atan2(entity.targetY - blob.y, entity.targetX - blob.x);
             }
             
-            const speed = 10; // Initial split speed
+            // Apply enhanced propulsion
+            const speed = SPLIT_FORCE * (1 + blob.mass / 1000); // Bigger splits move faster
+            const recoil = -speed * 0.3; // Add recoil to original blob
+            
+            // Update original blob
+            blob.dx += Math.cos(angle) * recoil;
+            blob.dy += Math.sin(angle) * recoil;
+            
+            // Create new blob with enhanced momentum
             const newBlob = {
                 x: blob.x,
                 y: blob.y,
@@ -1145,10 +1797,28 @@
                 dx: Math.cos(angle) * speed,
                 dy: Math.sin(angle) * speed,
                 color: blob.color,
-                createdAt: Date.now()
+                createdAt: Date.now(),
+                splitVelocity: speed // Track initial split velocity
             };
             
             entity.blobs.push(newBlob);
+        }
+
+        // Split all blobs (for multi-splitting)
+        function splitAllBlobs(entity) {
+            // Get current blob count
+            const originalCount = entity.blobs.length;
+            
+            // Only proceed if we're under the max limit
+            if (originalCount >= MAX_SPLITS) return;
+            
+            // Split each blob (working backwards to avoid index issues)
+            for (let i = originalCount - 1; i >= 0; i--) {
+                // Check we don't exceed max
+                if (entity.blobs.length < MAX_SPLITS) {
+                    splitBlob(entity, i);
+                }
+            }
         }
 
         // Split blob by virus (into many pieces)
@@ -1166,8 +1836,11 @@
             
             // Create new blobs in all directions
             for (let i = 1; i < numSplits; i++) {
+                // Only create new blobs if we're under the max limit
+                if (entity.blobs.length >= MAX_SPLITS) break;
+                
                 const angle = (i / numSplits) * Math.PI * 2;
-                const speed = 8; // Initial split speed
+                const speed = SPLIT_FORCE * 0.8; // Slightly less force than manual split
                 
                 const newBlob = {
                     x: blob.x,
@@ -1181,9 +1854,6 @@
                 };
                 
                 entity.blobs.push(newBlob);
-                
-                // Limit to MAX_SPLITS if needed
-                if (entity.blobs.length >= MAX_SPLITS) break;
             }
         }
 
@@ -1220,60 +1890,46 @@
             }
         }
 
-        // Eject mass (W key)
+        // Eject mass (E key)
         function ejectMass(entity, index) {
             const blob = entity.blobs[index];
             
-            // Only eject if blob is big enough
             if (blob.mass <= 20) return;
             
             // Calculate direction
-            let angle = 0;
+            let angle;
             if (entity === player) {
-                // For player, use movement direction
                 angle = Math.atan2(blob.dy, blob.dx);
                 if (blob.dx === 0 && blob.dy === 0) {
-                    // If not moving, use random direction
                     angle = Math.random() * Math.PI * 2;
                 }
             } else {
-                // For AI, use direction to target
                 angle = Math.atan2(entity.targetY - blob.y, entity.targetX - blob.x);
             }
             
-            // Create ejected mass pellet
+            // Enhanced pellet properties
+            const ejectedMass = Math.min(blob.mass * 0.1, 10); // Eject up to 10% mass
+            const pelletSize = PELLET_SIZE * 1.5;
+            const pelletSpeed = 8;
+            
+            // Create ejected mass pellet with momentum
             pellets.push({
                 x: blob.x + Math.cos(angle) * blob.size,
                 y: blob.y + Math.sin(angle) * blob.size,
-                dx: Math.cos(angle) * 5,
-                dy: Math.sin(angle) * 5,
-                size: PELLET_SIZE * 1.5,
-                color: blob.color
+                dx: Math.cos(angle) * pelletSpeed,
+                dy: Math.sin(angle) * pelletSpeed,
+                size: pelletSize,
+                mass: ejectedMass,
+                color: blob.color,
+                isBig: false,
+                ejectedAt: Date.now()
             });
             
-            // Reduce blob mass
-            blob.mass -= 1;
+            // Reduce blob mass and apply recoil
+            blob.mass -= ejectedMass;
             blob.size = calculateSize(blob.mass);
-            
-            // Push virus slightly if hit by ejected mass
-            for (let i = 0; i < viruses.length; i++) {
-                const virus = viruses[i];
-                const dx = virus.x - blob.x;
-                const dy = virus.y - blob.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                if (dist < blob.size + virus.size + 100) {
-                    // Check if angle points towards virus
-                    const virusAngle = Math.atan2(dy, dx);
-                    const angleDiff = Math.abs(virusAngle - angle);
-                    
-                    if (angleDiff < 0.5 || angleDiff > Math.PI * 2 - 0.5) {
-                        // Push virus slightly
-                        virus.x += Math.cos(angle) * 5;
-                        virus.y += Math.sin(angle) * 5;
-                    }
-                }
-            }
+            blob.dx -= Math.cos(angle) * 0.5;
+            blob.dy -= Math.sin(angle) * 0.5;
         }
 
         // Add a new AI player
@@ -1308,14 +1964,14 @@
                     x: x,
                     y: y,
                     size: BASE_SIZE,
-                    mass: 10,
+                    mass: START_MASS,
                     dx: 0,
                     dy: 0,
                     color: aiColor,
                     createdAt: Date.now()
                 }],
                 name: aiName,
-                totalMass: 10,
+                totalMass: START_MASS,
                 isAI: true,
                 targetX: x,
                 targetY: y,
@@ -1398,21 +2054,6 @@
         
         // Update team dominance chart
         function updateTeamDominance() {
-            // Calculate total mass for each team
-            teamMass = { red: 0, green: 0, blue: 0 };
-            
-            // Count player mass
-            if (player && player.team) {
-                teamMass[player.team] += player.totalMass;
-            }
-            
-            // Count AI mass
-            for (let i = 0; i < blobs.length; i++) {
-                if (blobs[i].team) {
-                    teamMass[blobs[i].team] += blobs[i].totalMass;
-                }
-            }
-            
             // Calculate total mass and percentages
             const totalMass = teamMass.red + teamMass.green + teamMass.blue;
             const redPercent = totalMass > 0 ? (teamMass.red / totalMass) * 100 : 33.33;
@@ -1422,6 +2063,60 @@
             // Update pie chart
             const pieChart = document.getElementById('team-pie-chart');
             pieChart.innerHTML = createPieChart(redPercent, greenPercent, bluePercent);
+        }
+        
+        // Update team stats bar graph
+        function updateTeamStats() {
+            const teamBars = document.getElementById('team-bars');
+            teamBars.innerHTML = '';
+            
+            // Find the maximum value for scaling
+            const maxValue = Math.max(
+                teamHighScores.red,
+                teamHighScores.green,
+                teamHighScores.blue,
+                teamMass.red,
+                teamMass.green,
+                teamMass.blue
+            );
+            
+            // Add current bars
+            addTeamBar(teamBars, 'Current Red', teamMass.red, maxValue, 'red');
+            addTeamBar(teamBars, 'Current Green', teamMass.green, maxValue, 'green');
+            addTeamBar(teamBars, 'Current Blue', teamMass.blue, maxValue, 'blue');
+            
+            // Add separator
+            const separator = document.createElement('div');
+            separator.style.height = '1px';
+            separator.style.background = '#ddd';
+            separator.style.margin = '10px 0';
+            teamBars.appendChild(separator);
+            
+            // Add high score bars
+            addTeamBar(teamBars, 'Red High', teamHighScores.red, maxValue, 'red');
+            addTeamBar(teamBars, 'Green High', teamHighScores.green, maxValue, 'green');
+            addTeamBar(teamBars, 'Blue High', teamHighScores.blue, maxValue, 'blue');
+        }
+        
+        // Add a team bar to the stats display
+        function addTeamBar(container, label, value, maxValue, color) {
+            const teamBar = document.createElement('div');
+            teamBar.style.width = Math.max(5, (value / maxValue) * 100) + '%';
+            teamBar.className = 'team-bar';
+            teamBar.style.backgroundColor = TEAM_COLORS[color] || color;
+            
+            const teamBarLabel = document.createElement('span');
+            teamBarLabel.className = 'team-bar-label';
+            teamBarLabel.textContent = `${label}: ${Math.floor(value)}`;
+            teamBar.appendChild(teamBarLabel);
+            
+            const teamBarContainer = document.createElement('div');
+            teamBarContainer.style.height = '20px';
+            teamBarContainer.style.marginBottom = '5px';
+            teamBarContainer.style.overflow = 'hidden';
+            teamBarContainer.appendChild(teamBar);
+            
+            container.appendChild(teamBarContainer);
         }
         
         // Create SVG pie chart
@@ -1449,6 +2144,9 @@
             return `<svg viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="48" fill="white" stroke="#ddd" stroke-width="1"></circle>
                 ${paths}
+                <text x="50" y="35" text-anchor="middle" font-size="10" font-weight="bold">Red: ${Math.round(redPercent)}%</text>
+                <text x="50" y="50" text-anchor="middle" font-size="10" font-weight="bold">Green: ${Math.round(greenPercent)}%</text>
+                <text x="50" y="65" text-anchor="middle" font-size="10" font-weight="bold">Blue: ${Math.round(bluePercent)}%</text>
             </svg>`;
         }
         
@@ -1485,6 +2183,18 @@
             document.getElementById('menu').style.display = 'block';
             document.getElementById('menu').querySelector('h1').textContent = 'Game Over';
             document.getElementById('playButton').textContent = 'Play Again';
+            
+            // Stop rainbow mode if active
+            if (rainbowInterval) {
+                clearInterval(rainbowInterval);
+                rainbowInterval = null;
+            }
+            
+            // Stop team history tracking
+            if (historyUpdateInterval) {
+                clearInterval(historyUpdateInterval);
+                historyUpdateInterval = null;
+            }
             
             // Reset game state
             player = null;
@@ -1531,7 +2241,26 @@
                 
                 // Check if pellet is in viewport
                 if (isInViewport(pellet)) {
-                    drawCircle(pellet.x, pellet.y, pellet.size, pellet.color);
+                    // Special styling for big pellets
+                    if (pellet.isBig) {
+                        // Draw glow effect
+                        ctx.beginPath();
+                        ctx.arc(pellet.x, pellet.y, pellet.size + 5, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(255, 255, 0, 0.2)';
+                        ctx.fill();
+                        
+                        // Draw pellet
+                        drawCircle(pellet.x, pellet.y, pellet.size, pellet.color);
+                        
+                        // Draw border
+                        ctx.beginPath();
+                        ctx.arc(pellet.x, pellet.y, pellet.size, 0, Math.PI * 2);
+                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    } else {
+                        drawCircle(pellet.x, pellet.y, pellet.size, pellet.color);
+                    }
                 }
             }
             
@@ -1558,13 +2287,21 @@
                     for (let j = 0; j < virus.pellets.length; j++) {
                         const pellet = virus.pellets[j];
                         drawCircle(
-                            virus.x + pellet.x - virus.x, 
-                            virus.y + pellet.y - virus.y, 
+                            virus.x + pellet.x, 
+                            virus.y + pellet.y, 
                             pellet.size, 
                             pellet.color
                         );
                     }
                 }
+            }
+            
+            // Draw dying cells (death animation)
+            for (let i = 0; i < dyingCells.length; i++) {
+                const cell = dyingCells[i];
+                ctx.globalAlpha = cell.opacity;
+                drawCircle(cell.x, cell.y, cell.size, cell.color);
+                ctx.globalAlpha = 1.0;
             }
             
             // Draw AI blobs
@@ -1599,19 +2336,6 @@
             ctx.arc(x, y, radius, 0, Math.PI * 2);
             ctx.fillStyle = color;
             ctx.fill();
-        }
-
-        // Draw blob with name
-        function drawBlob(x, y, radius, color, name) {
-            // Draw blob circle with gradient
-            const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-            gradient.addColorStop(0, lightenColor(color, 30));
-            gradient.addColorStop(1, color);
-            
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fillStyle = gradient;
-            ctx.fill();
             
             // Add highlight effect
             ctx.beginPath();
@@ -1633,36 +2357,93 @@
             // Draw text with stroke
             ctx.strokeText(name, x, y);
             ctx.fillText(name, x, y);
-        }
-
-        // Draw virus (with spikes)
-        function drawVirus(x, y, radius, color) {
-            const spikes = 12;
-            const innerRadius = radius * 0.9;
-            const outerRadius = radius * 1.1;
             
-            ctx.beginPath();
-            
-            for (let i = 0; i < spikes * 2; i++) {
-                const angle = (i / (spikes * 2)) * Math.PI * 2;
-                const r = i % 2 === 0 ? outerRadius : innerRadius;
-                const px = x + Math.cos(angle) * r;
-                const py = y + Math.sin(angle) * r;
-                
-                if (i === 0) {
-                    ctx.moveTo(px, py);
-                } else {
-                    ctx.lineTo(px, py);
-                }
-            }
-            
-            ctx.closePath();
-            ctx.fillStyle = color;
+            // Draw mass display for admin mode
+            if (gameMode === 'admin') {
+                ctx.fillStyle = 'white';
+                ctx.font = `${Math.max(10, fontSize * 0.7)}px Arial`;
+                ctx.fillText(`${Math.floor(radius)}`, x, y + fontSize);
+            }Style = color;
             ctx.fill();
         }
 
-        // Check if object is in viewport
-        function isInViewport(obj) {
+        // Draw blob with name
+        function drawBlob(x, y, radius, color, name) {
+    // Draw blob circle with gradient
+    const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+    gradient.addColorStop(0, lightenColor(color, 30));
+    gradient.addColorStop(1, color);
+    
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    
+    // Add highlight effect
+    ctx.beginPath();
+    ctx.arc(x - radius * 0.3, y - radius * 0.3, radius * 0.4, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.fill();
+    
+    // Draw name
+    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 2;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    // Scale text based on blob size
+    const fontSize = Math.max(12, Math.min(24, radius / 2));
+    ctx.font = `bold ${fontSize}px Arial`;
+    
+    // Draw text with stroke
+    ctx.strokeText(name, x, y);
+    ctx.fillText(name, x, y);
+    
+    // Draw mass display for admin mode
+    if (gameMode === 'admin') {
+        ctx.fillStyle = 'white';
+        ctx.font = `${Math.max(10, fontSize * 0.7)}px Arial`;
+        ctx.fillText(`${Math.floor(radius)}`, x, y + fontSize);
+    }
+}
+
+// Draw virus (with spikes)
+function drawVirus(x, y, radius, color) {
+    const spikes = 12;
+    const innerRadius = radius * 0.9;
+    const outerRadius = radius * 1.1;
+    
+    ctx.beginPath();
+    
+    for (let i = 0; i < spikes * 2; i++) {
+        const angle = (i / (spikes * 2)) * Math.PI * 2;
+        const r = i % 2 === 0 ? outerRadius : innerRadius;
+        const px = x + Math.cos(angle) * r;
+        const py = y + Math.sin(angle) * r;
+        
+        if (i === 0) {
+            ctx.moveTo(px, py);
+        } else {
+            ctx.lineTo(px, py);
+        }
+    }
+    
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+    
+    // Add glow effect in admin mode
+    if (gameMode === 'admin') {
+        ctx.beginPath();
+        ctx.arc(x, y, radius * 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 255, 0, 0.1)';
+        ctx.fill();
+    }
+}
+
+ // Check if object is in viewport
+ function isInViewport(obj) {
             const viewportLeft = camera.x - (canvas.width / 2) / camera.scale;
             const viewportRight = camera.x + (canvas.width / 2) / camera.scale;
             const viewportTop = camera.y - (canvas.height / 2) / camera.scale;
